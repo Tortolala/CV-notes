@@ -9,13 +9,13 @@ parser.add_argument('--output', help='Output file name', default='fprint3_ccl.pn
 args = parser.parse_args()
 # print(args.input, args.output) # Check arguments
 
-
 def imgpad(img, r):
 
-    new_img = img
-    # Add padding to new_img
-
-    return new_img
+    v_padding = np.zeros((r, img.shape[1]))
+    temp_matrix = np.r_[v_padding, img, v_padding]
+    h_padding = np.zeros((temp_matrix.shape[0], r))
+    new_matrix = np.c_[h_padding, temp_matrix, h_padding]
+    return new_matrix
 
 
 def connected_c(img):
@@ -29,4 +29,6 @@ a = np.array([[ 1.,  1.,  1.,  1.,  1.],
             [ 1.,  1.,  1.,  1.,  1.],
             [ 1.,  1.,  1.,  1.,  1.]])
 
-print(imgpad(a, 1))
+
+print(imgpad(a, 2))
+
